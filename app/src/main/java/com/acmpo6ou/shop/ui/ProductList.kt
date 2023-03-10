@@ -1,7 +1,5 @@
 package com.acmpo6ou.shop.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,12 +39,11 @@ fun ProductList(viewModel: ProductsViewModel) {
 fun ProductItem(product: Product) {
     Card(
         modifier = Modifier
-            .border(BorderStroke(1.dp, Color.Black))
             .padding(8.dp)
             .wrapContentHeight(Alignment.Top)
             .clickable {}
             .fillMaxWidth(),
-        elevation = 10.dp,
+        elevation = 5.dp,
     ) {
         Row(
             modifier = Modifier.padding(8.dp),
