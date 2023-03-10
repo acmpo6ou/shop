@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.acmpo6ou.shop.model.ProductRepo
+import com.acmpo6ou.shop.model.ProductRepo.Companion.CART_IDS
 import com.acmpo6ou.shop.ui.ProductList
 import com.acmpo6ou.shop.ui.ProductsViewModel
 import com.acmpo6ou.shop.ui.theme.ShopTheme
@@ -18,7 +19,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val repo = ProductRepo(assets)
+        val repo = ProductRepo(
+            assets, getSharedPreferences(CART_IDS, MODE_PRIVATE),
+        )
         productsViewModel.initialize(repo)
 
         setContent {

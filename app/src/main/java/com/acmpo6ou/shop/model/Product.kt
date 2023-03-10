@@ -1,4 +1,5 @@
 package com.acmpo6ou.shop.model
+import android.content.SharedPreferences
 import android.content.res.AssetManager
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -42,7 +43,10 @@ data class Product(
     )
 }
 
-class ProductRepo(private val assets: AssetManager) {
+class ProductRepo(
+    private val assets: AssetManager,
+    private val prefs: SharedPreferences,
+) {
     /**
      * Loads the products from assets.
      */
@@ -51,5 +55,20 @@ class ProductRepo(private val assets: AssetManager) {
             .bufferedReader()
             .use { it.readText() }
         return Json.decodeFromString<Products>(json).products
+    }
+
+    fun getCartIds(): List<Int> {
+        return prefs.getStringSet(CART_IDS, setOf())
+            ?.map { it.toInt() } ?: listOf()
+    }
+
+    fun saveCartIds(ids: List<Int>) {
+        prefs.edit()
+            .putStringSet(CART_IDS, ids.map { it.toString() }.toSet())
+            .apply()
+    }
+
+    companion object {
+        const val CART_IDS = "cart_ids"
     }
 }

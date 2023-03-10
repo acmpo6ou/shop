@@ -13,7 +13,7 @@ class ProductsViewModel : ViewModel() {
     fun initialize(repo: ProductRepo) {
         this.repo = repo
         products.addAll(repo.getProducts())
-        // TODO: load cart ids
+        cartIds.addAll(repo.getCartIds())
     }
 
     fun onCartClicked(product: Product) {
@@ -22,6 +22,6 @@ class ProductsViewModel : ViewModel() {
         } else {
             cartIds.add(product.id)
         }
-        // TODO: save cart ids
+        repo.saveCartIds(cartIds)
     }
 }
