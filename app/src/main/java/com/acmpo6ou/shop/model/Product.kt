@@ -18,7 +18,7 @@ data class Product(
     val type: String,
     val imageUrl: String,
 ) {
-    val prettyPrice get() = "${price.value} ${price.currency}"
+    val prettyPrice get() = "${"%.2f".format(price.value)} ${price.currency}"
     val prettyInfo: String
         get() {
             var result = ""
