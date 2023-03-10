@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.acmpo6ou.shop.model.Product
 import com.acmpo6ou.shop.ui.theme.ShopTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProductItem(name: String, info: String, price: String, imageUrl: String) {
+fun ProductItem(product: Product) {
     Card(
         modifier = Modifier
             .border(BorderStroke(1.dp, Color.Black))
@@ -56,29 +57,29 @@ fun ProductItem(name: String, info: String, price: String, imageUrl: String) {
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
+                    .data(product.imageUrl)
                     .crossfade(true)
                     .build(),
-                contentDescription = "$name image",
+                contentDescription = "${product.name} image",
                 modifier = Modifier.size(100.dp),
             )
             Column {
                 Row {
                     Text(
-                        text = name,
+                        text = product.name,
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(
                             painterResource(id = R.drawable.add_shopping_cart),
-                            "Add $name to cart",
+                            "Add ${product.name} to cart",
                         )
                     }
                 }
-                Text(text = info)
+                Text(text = product.prettyInfo)
                 Text(
-                    text = price,
+                    text = product.prettyPrice,
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     textAlign = TextAlign.End,
@@ -94,10 +95,17 @@ fun ProductItem(name: String, info: String, price: String, imageUrl: String) {
 fun ProductItemPreview() {
     ShopTheme {
         ProductItem(
-            "Test name",
-            "Color: red\nMaterial: wood",
-            "300 kr",
-            "https://shop.static.ingka.ikea.com/PIAimages/0462849_PE608354_S4.JPG",
+            Product(
+                id = 1,
+                name = "Henriksdal",
+                price = Product.Price(499f, "kr"),
+                info = mapOf(
+                    "material" to "wood with cover",
+                    "color" to "white",
+                ),
+                type = "chair",
+                imageUrl = "https://shop.static.ingka.ikea.com/PIAimages/0462849_PE608354_S4.JPG",
+            )
         )
     }
 }

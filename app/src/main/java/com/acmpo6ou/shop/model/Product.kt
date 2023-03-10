@@ -11,24 +11,27 @@ data class Products(
 
 @Serializable
 data class Product(
-    val id: String,
+    val id: Int,
     val name: String,
     val price: Price,
-    val info: Info,
+    val info: Map<String, String>,
     val type: String,
     val imageUrl: String,
 ) {
-    @Serializable
-    data class Price(
-        val value: Double,
-        val currency: String,
-    )
+    val prettyPrice get() = "${price.value} ${price.currency}"
+    val prettyInfo: String
+        get() {
+            var result = ""
+            info.forEach { (key, value) ->
+                result += "${key.capitalize()}: $value\n"
+            }
+            return result
+        }
 
     @Serializable
-    data class Info(
-        val color: String,
-        val material: String? = null,
-        val numberOfSeats: Int? = null,
+    data class Price(
+        val value: Float,
+        val currency: String,
     )
 }
 
