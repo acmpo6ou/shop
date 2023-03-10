@@ -9,7 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.acmpo6ou.shop.model.ProductRepo
-import com.acmpo6ou.shop.ui.ProductItemPreview
+import com.acmpo6ou.shop.ui.ProductList
 import com.acmpo6ou.shop.ui.ProductsViewModel
 import com.acmpo6ou.shop.ui.theme.ShopTheme
 
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background,
                 ) {
-                    ProductItemPreview()
+                    ProductList(productsViewModel)
                 }
             }
         }
