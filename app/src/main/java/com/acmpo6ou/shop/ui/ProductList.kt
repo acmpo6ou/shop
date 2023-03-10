@@ -96,9 +96,9 @@ fun ProductItemPreview() {
                 id = 1,
                 name = "Henriksdal",
                 price = Product.Price(499f, "kr"),
-                info = mapOf(
-                    "material" to "wood with cover",
-                    "color" to "white",
+                info = Product.Info(
+                    color = "white",
+                    material = "wood with cover",
                 ),
                 type = "chair",
                 imageUrl = "https://shop.static.ingka.ikea.com/PIAimages/0462849_PE608354_S4.JPG",
