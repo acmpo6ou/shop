@@ -4,10 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -16,27 +13,25 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.model.Product
-import com.acmpo6ou.shop.ui.theme.ShopTheme
 
 @Composable
 fun ProductList(viewModel: ProductsViewModel) {
     val products = remember { viewModel.products }
     LazyColumn {
         items(items = products) {
-            ProductItem(it)
+            ProductItem(it, viewModel)
         }
     }
 }
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, viewModel: ProductsViewModel) {
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -63,10 +58,16 @@ fun ProductItem(product: Product) {
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.weight(1f))
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { viewModel.onCartClicked(product) }) {
+                        val cartIds = remember { viewModel.cartIds }
                         Icon(
-                            painterResource(id = R.drawable.add_shopping_cart),
-                            "Add ${product.name} to cart",
+                            painter = painterResource(id = R.drawable.shopping_cart),
+                            tint = if (product.id in cartIds) {
+                                MaterialTheme.colors.primary
+                            } else {
+                                MaterialTheme.colors.onBackground
+                            },
+                            contentDescription = "Add ${product.name} to cart",
                         )
                     }
                 }
@@ -80,25 +81,5 @@ fun ProductItem(product: Product) {
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProductItemPreview() {
-    ShopTheme {
-        ProductItem(
-            Product(
-                id = 1,
-                name = "Henriksdal",
-                price = Product.Price(499f, "kr"),
-                info = Product.Info(
-                    color = "white",
-                    material = "wood with cover",
-                ),
-                type = "chair",
-                imageUrl = "https://shop.static.ingka.ikea.com/PIAimages/0462849_PE608354_S4.JPG",
-            ),
-        )
     }
 }
