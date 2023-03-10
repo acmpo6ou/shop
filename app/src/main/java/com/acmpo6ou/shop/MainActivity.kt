@@ -3,6 +3,7 @@ package com.acmpo6ou.shop
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -22,11 +23,18 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.acmpo6ou.shop.model.Product
+import com.acmpo6ou.shop.model.ProductRepo
+import com.acmpo6ou.shop.ui.ProductsViewModel
 import com.acmpo6ou.shop.ui.theme.ShopTheme
 
 class MainActivity : ComponentActivity() {
+    private val productsViewModel: ProductsViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val repo = ProductRepo(assets)
+        productsViewModel.initialize(repo)
+
         setContent {
             ShopTheme {
                 // A surface container using the 'background' color from the theme
@@ -105,7 +113,7 @@ fun ProductItemPreview() {
                 ),
                 type = "chair",
                 imageUrl = "https://shop.static.ingka.ikea.com/PIAimages/0462849_PE608354_S4.JPG",
-            )
+            ),
         )
     }
 }
