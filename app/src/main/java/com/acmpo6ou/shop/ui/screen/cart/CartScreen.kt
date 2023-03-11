@@ -19,7 +19,7 @@ fun CartScreen(viewModel: CartViewModel) {
     if (viewModel.products.size > 0) {
         Column {
             TotalPrice(viewModel)
-            ProductList(viewModel)
+            ProductList(viewModel) {}
         }
     } else {
         Column(

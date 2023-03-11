@@ -19,19 +19,26 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.model.Product
+import com.acmpo6ou.shop.ui.screen.productlist.ProductListViewModel
 
 @Composable
-fun ProductList(viewModel: ProductsViewModel) {
+fun ProductList(
+    viewModel: ProductsViewModel,
+    icon: @Composable (Product) -> Unit,
+) {
     val products = remember { viewModel.products }
     LazyColumn {
         items(items = products) {
-            ProductItem(it, viewModel)
+            ProductItem(it, icon)
         }
     }
 }
 
 @Composable
-fun ProductItem(product: Product, viewModel: ProductsViewModel) {
+fun ProductItem(
+    product: Product,
+    icon: @Composable (Product) -> Unit,
+) {
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -58,18 +65,7 @@ fun ProductItem(product: Product, viewModel: ProductsViewModel) {
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.weight(1f))
-                    IconButton(onClick = { viewModel.onIconClicked(product) }) {
-                        val cartIds = remember { viewModel.cartIds }
-                        Icon(
-                            painter = painterResource(id = R.drawable.shopping_cart),
-                            tint = if (product.id in cartIds) {
-                                MaterialTheme.colors.primary
-                            } else {
-                                MaterialTheme.colors.onBackground
-                            },
-                            contentDescription = "Add ${product.name} to cart",
-                        )
-                    }
+                    icon(product)
                 }
                 Text(text = product.prettyInfo)
                 Text(
@@ -81,5 +77,21 @@ fun ProductItem(product: Product, viewModel: ProductsViewModel) {
                 )
             }
         }
+    }
+}
+
+@Composable
+fun ToggleCart(viewModel: ProductListViewModel, product: Product) {
+    IconButton(onClick = { viewModel.onIconClicked(product) }) {
+        val cartIds = remember { viewModel.cartIds }
+        Icon(
+            painter = painterResource(id = R.drawable.shopping_cart),
+            tint = if (product.id in cartIds) {
+                MaterialTheme.colors.primary
+            } else {
+                MaterialTheme.colors.onBackground
+            },
+            contentDescription = "Add ${product.name} to cart",
+        )
     }
 }
