@@ -1,4 +1,4 @@
-package com.acmpo6ou.shop.ui.screen.productlist
+package com.acmpo6ou.shop.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -58,7 +58,7 @@ fun ProductItem(product: Product, viewModel: ProductsViewModel) {
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.weight(1f))
-                    IconButton(onClick = { viewModel.onCartClicked(product) }) {
+                    IconButton(onClick = { viewModel.onIconClicked(product) }) {
                         val cartIds = remember { viewModel.cartIds }
                         Icon(
                             painter = painterResource(id = R.drawable.shopping_cart),

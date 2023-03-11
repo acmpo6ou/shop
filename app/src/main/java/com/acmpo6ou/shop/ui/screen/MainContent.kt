@@ -19,7 +19,6 @@ import androidx.navigation.compose.rememberNavController
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.ui.screen.cart.CartScreen
 import com.acmpo6ou.shop.ui.screen.productlist.ProductListScreen
-import com.acmpo6ou.shop.ui.screen.productlist.ProductsViewModel
 
 enum class Screen(
     val route: String,

@@ -7,11 +7,11 @@ import androidx.activity.viewModels
 import com.acmpo6ou.shop.model.ProductRepo
 import com.acmpo6ou.shop.model.ProductRepo.Companion.CART_IDS
 import com.acmpo6ou.shop.ui.screen.MainContent
-import com.acmpo6ou.shop.ui.screen.productlist.ProductsViewModel
+import com.acmpo6ou.shop.ui.screen.productlist.ProductListViewModel
 import com.acmpo6ou.shop.ui.theme.ShopTheme
 
 class MainActivity : ComponentActivity() {
-    private val productsViewModel: ProductsViewModel by viewModels()
+    private val productListViewModel: ProductListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,11 +19,11 @@ class MainActivity : ComponentActivity() {
             assets,
             getSharedPreferences(CART_IDS, MODE_PRIVATE),
         )
-        productsViewModel.initialize(repo)
+        productListViewModel.initialize(repo)
 
         setContent {
             ShopTheme {
-                MainContent(productsViewModel)
+                MainContent(productListViewModel)
             }
         }
     }
