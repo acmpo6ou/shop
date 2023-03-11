@@ -1,17 +1,16 @@
 package com.acmpo6ou.shop.ui.screen.cart
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.acmpo6ou.shop.R
+import com.acmpo6ou.shop.model.Product
 import com.acmpo6ou.shop.ui.screen.ProductList
 
 @Composable
@@ -19,7 +18,9 @@ fun CartScreen(viewModel: CartViewModel) {
     if (viewModel.products.size > 0) {
         Column {
             TotalPrice(viewModel)
-            ProductList(viewModel) {}
+            ProductList(viewModel) { product: Product ->
+                RemoveFromCart(viewModel, product)
+            }
         }
     } else {
         Column(
@@ -53,5 +54,16 @@ fun TotalPrice(viewModel: CartViewModel) {
                 Text(stringResource(R.string.pay))
             }
         }
+    }
+}
+
+@Composable
+fun RemoveFromCart(viewModel: CartViewModel, product: Product) {
+    IconButton(onClick = { viewModel.onIconClicked(product) }) {
+        Icon(
+            painter = painterResource(R.drawable.remove_from_cart),
+            tint = MaterialTheme.colors.error,
+            contentDescription = "Remove ${product.name} from cart",
+        )
     }
 }

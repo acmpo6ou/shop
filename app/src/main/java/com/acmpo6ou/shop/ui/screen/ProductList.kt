@@ -91,6 +91,7 @@ fun ToggleCart(viewModel: ProductListViewModel, product: Product) {
             } else {
                 MaterialTheme.colors.onBackground
             },
+            // TODO: should be dynamic depending on add/remove
             contentDescription = "Add ${product.name} to cart",
         )
     }

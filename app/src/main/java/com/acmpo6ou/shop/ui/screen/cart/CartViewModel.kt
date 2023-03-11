@@ -12,6 +12,8 @@ class CartViewModel : ProductsViewModel() {
     }
 
     override fun onIconClicked(product: Product) {
-        TODO("Not yet implemented")
+        products.remove(product)
+        val cartIds = products.map { it.id }
+        repo.saveCartIds(cartIds)
     }
 }
