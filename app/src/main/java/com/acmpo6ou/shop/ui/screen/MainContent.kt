@@ -65,15 +65,14 @@ fun BottomBar(navController: NavHostController) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         Screen.values().forEach { screen ->
-            val label = stringResource(screen.labelId)
             BottomNavigationItem(
                 icon = {
                     Icon(
                         painterResource(screen.iconId),
-                        contentDescription = label,
+                        contentDescription = null,
                     )
                 },
-                label = { Text(label) },
+                label = { Text(stringResource(screen.labelId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {
