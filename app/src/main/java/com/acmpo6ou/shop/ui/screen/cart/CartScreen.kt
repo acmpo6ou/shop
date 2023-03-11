@@ -1,22 +1,26 @@
 package com.acmpo6ou.shop.ui.screen.cart
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.ui.screen.ProductList
 
 @Composable
 fun CartScreen(viewModel: CartViewModel) {
     if (viewModel.products.size > 0) {
-        ProductList(viewModel)
+        Column {
+            TotalPrice(viewModel)
+            ProductList(viewModel)
+        }
     } else {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -24,6 +28,30 @@ fun CartScreen(viewModel: CartViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(stringResource(R.string.no_items))
+        }
+    }
+}
+
+@Composable
+fun TotalPrice(viewModel: CartViewModel) {
+    Surface(
+        color = MaterialTheme.colors.background,
+        modifier = Modifier.padding(8.dp),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            val total = viewModel.products.sumOf { it.price.value.toDouble() }
+            val currency = viewModel.products.first().price.currency
+            Text(
+                stringResource(R.string.total_price, total, currency),
+                fontSize = 18.sp,
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+            Button(onClick = {}) {
+                Text(stringResource(R.string.pay))
+            }
         }
     }
 }

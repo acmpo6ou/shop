@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
             getSharedPreferences(CART_IDS, MODE_PRIVATE),
         )
         productListViewModel.initialize(repo)
+        cartViewModel.initialize(repo)
 
         setContent {
             ShopTheme {
