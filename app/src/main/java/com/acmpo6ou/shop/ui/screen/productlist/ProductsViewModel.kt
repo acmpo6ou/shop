@@ -1,4 +1,4 @@
-package com.acmpo6ou.shop.ui
+package com.acmpo6ou.shop.ui.screen.productlist
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
