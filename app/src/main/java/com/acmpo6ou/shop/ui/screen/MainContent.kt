@@ -18,7 +18,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.ui.screen.cart.CartScreen
+import com.acmpo6ou.shop.ui.screen.cart.CartViewModel
 import com.acmpo6ou.shop.ui.screen.productlist.ProductListScreen
+import com.acmpo6ou.shop.ui.screen.productlist.ProductListViewModel
 
 enum class Screen(
     val route: String,
@@ -38,7 +40,10 @@ enum class Screen(
 }
 
 @Composable
-fun MainContent(productsViewModel: ProductsViewModel) {
+fun MainContent(
+    productListViewModel: ProductListViewModel,
+    cartViewModel: CartViewModel,
+) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBar(navController) },
@@ -49,10 +54,10 @@ fun MainContent(productsViewModel: ProductsViewModel) {
             modifier = Modifier.padding(innerPadding),
         ) {
             composable(Screen.PRODUCT_LIST.route) {
-                ProductListScreen(productsViewModel)
+                ProductListScreen(productListViewModel)
             }
             composable(Screen.CART.route) {
-                CartScreen()
+                CartScreen(cartViewModel)
             }
         }
     }
