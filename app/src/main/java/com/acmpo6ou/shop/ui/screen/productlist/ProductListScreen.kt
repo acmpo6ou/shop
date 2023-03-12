@@ -19,7 +19,7 @@ fun ProductListScreen(viewModel: ProductListViewModel) {
 
 @Composable
 fun ToggleCart(viewModel: ProductListViewModel, product: Product) {
-    IconButton(onClick = { viewModel.onIconClicked(product) }) {
+    IconButton(onClick = { viewModel.toggleCart(product) }) {
         val cartIds = remember { viewModel.cartIds }
         Icon(
             painter = painterResource(id = R.drawable.shopping_cart),

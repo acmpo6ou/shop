@@ -10,7 +10,7 @@ class CartViewModel : ProductsViewModel() {
         products.addAll(repo.getProducts().filter { it.id in cartIds })
     }
 
-    override fun onIconClicked(product: Product) {
+    fun removeFromCart(product: Product) {
         products.remove(product)
         val cartIds = products.map { it.id }
         repo.saveCartIds(cartIds)

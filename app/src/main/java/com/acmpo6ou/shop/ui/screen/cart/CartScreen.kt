@@ -59,7 +59,7 @@ fun TotalPrice(viewModel: CartViewModel) {
 
 @Composable
 fun RemoveFromCart(viewModel: CartViewModel, product: Product) {
-    IconButton(onClick = { viewModel.onIconClicked(product) }) {
+    IconButton(onClick = { viewModel.removeFromCart(product) }) {
         Icon(
             painter = painterResource(R.drawable.remove_from_cart),
             tint = MaterialTheme.colors.error,

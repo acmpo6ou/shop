@@ -14,7 +14,7 @@ class ProductListViewModel : ProductsViewModel() {
         cartIds.addAll(repo.getCartIds())
     }
 
-    override fun onIconClicked(product: Product) {
+    fun toggleCart(product: Product) {
         if (product.id in cartIds) {
             cartIds.remove(product.id)
         } else {

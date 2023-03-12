@@ -12,6 +12,4 @@ abstract class ProductsViewModel : ViewModel() {
     open fun initialize() {
         products.clear()
     }
-
-    abstract fun onIconClicked(product: Product)
 }
