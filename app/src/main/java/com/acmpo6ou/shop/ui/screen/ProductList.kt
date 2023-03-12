@@ -53,7 +53,7 @@ fun ProductItem(
                     .data(product.imageUrl)
                     .crossfade(true)
                     .build(),
-                contentDescription = "${product.name} image",
+                contentDescription = null,
                 modifier = Modifier.size(100.dp),
             )
             Column {
