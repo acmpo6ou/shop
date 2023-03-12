@@ -28,10 +28,10 @@ fun ToggleCart(viewModel: ProductListViewModel, product: Product) {
 
         if (product.id in cartIds) {
             tint = MaterialTheme.colors.primary
-            description = stringResource(R.string.add_to_cart, product.name)
+            description = stringResource(R.string.remove_from_cart, product.name)
         } else {
             tint = MaterialTheme.colors.onBackground
-            description = stringResource(R.string.remove_from_cart, product.name)
+            description = stringResource(R.string.add_to_cart, product.name)
         }
 
         Icon(

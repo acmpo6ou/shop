@@ -1,15 +1,27 @@
 package com.acmpo6ou.shop
 
+import android.content.Context.MODE_PRIVATE
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.test.platform.app.InstrumentationRegistry
+import com.acmpo6ou.shop.model.ProductRepo.Companion.CART_IDS
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
 class MainActivityTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+
+    @After
+    fun clearCartIds() {
+        val prefs = context.getSharedPreferences(CART_IDS, MODE_PRIVATE)
+        prefs.edit().clear().apply()
+    }
 
     @Test
     fun testShoppingCart() {
@@ -47,7 +59,7 @@ class MainActivityTest {
 
         // the total price should be correct
         composeTestRule
-            .onNodeWithText("Total price: 3894 kr")
+            .onNodeWithText("Total: 3894.00 kr")
             .assertExists()
 
         // remove Nyhamn from the cart
@@ -58,11 +70,11 @@ class MainActivityTest {
         // it shouldn't be in the cart anymore
         composeTestRule
             .onNodeWithContentDescription("Remove Nyhamn from cart")
-            .assertDoesNotExist()
+            .assertIsNotDisplayed()
 
         // the total price should be updated
         composeTestRule
-            .onNodeWithText("Total price: 499 kr")
+            .onNodeWithText("Total: 499.00 kr")
             .assertExists()
 
         // go back to product list
