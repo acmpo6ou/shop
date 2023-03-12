@@ -46,7 +46,13 @@ fun MainContent(
 ) {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomBar(navController) },
+        bottomBar = {
+            BottomBar(
+                navController,
+                productListViewModel,
+                cartViewModel,
+            )
+        },
     ) { innerPadding ->
         NavHost(
             navController,
@@ -64,7 +70,11 @@ fun MainContent(
 }
 
 @Composable
-fun BottomBar(navController: NavHostController) {
+fun BottomBar(
+    navController: NavHostController,
+    productListViewModel: ProductListViewModel,
+    cartViewModel: CartViewModel,
+) {
     BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
@@ -86,6 +96,10 @@ fun BottomBar(navController: NavHostController) {
                         launchSingleTop = true
                         restoreState = true
                     }
+
+                    // sync view models
+                    productListViewModel.initialize()
+                    cartViewModel.initialize()
                 },
             )
         }

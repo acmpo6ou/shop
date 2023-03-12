@@ -21,8 +21,11 @@ class MainActivity : ComponentActivity() {
             assets,
             getSharedPreferences(CART_IDS, MODE_PRIVATE),
         )
-        productListViewModel.initialize(repo)
-        cartViewModel.initialize(repo)
+
+        productListViewModel.repo = repo
+        cartViewModel.repo = repo
+        productListViewModel.initialize()
+        cartViewModel.initialize()
 
         setContent {
             ShopTheme {

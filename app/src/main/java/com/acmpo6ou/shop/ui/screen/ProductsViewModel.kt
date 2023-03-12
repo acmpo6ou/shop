@@ -9,8 +9,8 @@ abstract class ProductsViewModel : ViewModel() {
     lateinit var repo: ProductRepo
     val products = mutableStateListOf<Product>()
 
-    open fun initialize(repo: ProductRepo) {
-        this.repo = repo
+    open fun initialize() {
+        products.clear()
     }
 
     abstract fun onIconClicked(product: Product)
