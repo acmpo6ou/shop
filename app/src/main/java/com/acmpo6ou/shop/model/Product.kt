@@ -1,6 +1,9 @@
 package com.acmpo6ou.shop.model
+
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.AssetManager
+import com.acmpo6ou.shop.R
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -20,14 +23,13 @@ data class Product(
     val imageUrl: String,
 ) {
     val prettyPrice get() = "${"%.2f".format(price.value)} ${price.currency}"
-    val prettyInfo: String
-        get() {
-            return if (type == "chair") {
-                "Color: ${info.color}\nMaterial: ${info.material}"
-            } else {
-                "Color: ${info.color}\nNumber of seats: ${info.numberOfSeats}"
-            }
+    fun getPrettyInfo(context: Context): String {
+        return if (type == "chair") {
+            context.getString(R.string.chair_info, info.color, info.material)
+        } else {
+            context.getString(R.string.couch_info, info.color, info.numberOfSeats)
         }
+    }
 
     @Serializable
     data class Price(

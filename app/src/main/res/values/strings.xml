@@ -7,4 +7,6 @@
     <string name="pay">Pay</string>
     <string name="add_to_cart">Add %s to cart</string>
     <string name="remove_from_cart">Remove %s from cart</string>
+    <string name="chair_info">Color: %s\nMaterial: %s</string>
+    <string name="couch_info">Color: %s\nNumber of seats: %d</string>
 </resources>

@@ -65,7 +65,7 @@ fun ProductItem(
                     Spacer(modifier = Modifier.weight(1f))
                     icon(product)
                 }
-                Text(text = product.prettyInfo)
+                Text(text = product.getPrettyInfo(LocalContext.current))
                 Text(
                     text = product.prettyPrice,
                     fontWeight = FontWeight.Bold,
