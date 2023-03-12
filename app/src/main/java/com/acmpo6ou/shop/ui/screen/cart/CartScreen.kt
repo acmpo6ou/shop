@@ -63,7 +63,7 @@ fun RemoveFromCart(viewModel: CartViewModel, product: Product) {
         Icon(
             painter = painterResource(R.drawable.remove_from_cart),
             tint = MaterialTheme.colors.error,
-            contentDescription = "Remove ${product.name} from cart",
+            contentDescription = stringResource(R.string.remove_from_cart, product.name),
         )
     }
 }
