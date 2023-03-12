@@ -59,11 +59,17 @@ class ProductRepo(
         return Json.decodeFromString<Products>(json).products
     }
 
+    /**
+     * Loads ids of products added to cart.
+     */
     fun getCartIds(): List<Int> {
         return prefs.getStringSet(CART_IDS, setOf())
             ?.map { it.toInt() } ?: listOf()
     }
 
+    /**
+     * Saves cart ids to shared preferences.
+     */
     fun saveCartIds(ids: List<Int>) {
         prefs.edit()
             .putStringSet(CART_IDS, ids.map { it.toString() }.toSet())

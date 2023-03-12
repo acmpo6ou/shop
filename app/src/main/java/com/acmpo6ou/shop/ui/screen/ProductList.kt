@@ -45,9 +45,7 @@ fun ProductItem(
             .fillMaxWidth(),
         elevation = 5.dp,
     ) {
-        Row(
-            modifier = Modifier.padding(8.dp),
-        ) {
+        Row(modifier = Modifier.padding(8.dp)) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(product.imageUrl)
@@ -65,7 +63,7 @@ fun ProductItem(
                     Spacer(modifier = Modifier.weight(1f))
                     icon(product)
                 }
-                Text(text = product.getPrettyInfo(LocalContext.current))
+                Text(product.getPrettyInfo(LocalContext.current))
                 Text(
                     text = product.prettyPrice,
                     fontWeight = FontWeight.Bold,

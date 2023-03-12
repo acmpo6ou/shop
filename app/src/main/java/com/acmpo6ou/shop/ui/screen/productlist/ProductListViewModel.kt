@@ -14,6 +14,9 @@ class ProductListViewModel : ProductsViewModel() {
         cartIds.addAll(repo.getCartIds())
     }
 
+    /**
+     * Adds or removes a product from the cart.
+     */
     fun toggleCart(product: Product) {
         if (product.id in cartIds) {
             cartIds.remove(product.id)

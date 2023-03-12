@@ -27,16 +27,8 @@ enum class Screen(
     @StringRes val labelId: Int,
     @DrawableRes val iconId: Int,
 ) {
-    PRODUCT_LIST(
-        "product_list",
-        R.string.product_list_label,
-        R.drawable.search,
-    ),
-    CART(
-        "cart",
-        R.string.cart_label,
-        R.drawable.shopping_cart,
-    ),
+    PRODUCT_LIST("product_list", R.string.product_list_label, R.drawable.search),
+    CART("cart", R.string.cart_label, R.drawable.shopping_cart),
 }
 
 @Composable
@@ -47,11 +39,7 @@ fun MainContent(
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            BottomBar(
-                navController,
-                productListViewModel,
-                cartViewModel,
-            )
+            BottomBar(navController, productListViewModel, cartViewModel)
         },
     ) { innerPadding ->
         NavHost(
@@ -97,7 +85,7 @@ fun BottomBar(
                         restoreState = true
                     }
 
-                    // sync view models
+                    // sync view models, otherwise cart ids will be out of sync
                     productListViewModel.initialize()
                     cartViewModel.initialize()
                 },

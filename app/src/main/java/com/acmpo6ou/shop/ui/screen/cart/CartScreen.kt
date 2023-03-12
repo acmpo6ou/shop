@@ -39,9 +39,7 @@ fun TotalPrice(viewModel: CartViewModel) {
         color = MaterialTheme.colors.background,
         modifier = Modifier.padding(8.dp),
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             val total = viewModel.products.sumOf { it.price.value.toDouble() }
             val currency = viewModel.products.first().price.currency
             Text(
