@@ -11,16 +11,17 @@ import androidx.compose.ui.res.stringResource
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.model.Product
 import com.acmpo6ou.shop.ui.screen.ProductList
+import com.acmpo6ou.shop.ui.screen.ProductsViewModel
 
 @Composable
-fun ProductListScreen(viewModel: ProductListViewModel) {
+fun ProductListScreen(viewModel: ProductsViewModel) {
     ProductList(viewModel) { product: Product ->
         ToggleCart(viewModel, product)
     }
 }
 
 @Composable
-fun ToggleCart(viewModel: ProductListViewModel, product: Product) {
+fun ToggleCart(viewModel: ProductsViewModel, product: Product) {
     IconButton(onClick = { viewModel.toggleCart(product) }) {
         val cartIds = remember { viewModel.cartIds }
         val tint: Color

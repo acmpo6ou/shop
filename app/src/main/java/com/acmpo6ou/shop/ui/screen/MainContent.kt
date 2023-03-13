@@ -18,9 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.ui.screen.cart.CartScreen
-import com.acmpo6ou.shop.ui.screen.cart.CartViewModel
 import com.acmpo6ou.shop.ui.screen.productlist.ProductListScreen
-import com.acmpo6ou.shop.ui.screen.productlist.ProductListViewModel
 
 enum class Screen(
     val route: String,
@@ -32,14 +30,11 @@ enum class Screen(
 }
 
 @Composable
-fun MainContent(
-    productListViewModel: ProductListViewModel,
-    cartViewModel: CartViewModel,
-) {
+fun MainContent(viewModel: ProductsViewModel) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            BottomBar(navController, productListViewModel, cartViewModel)
+            BottomBar(navController, viewModel)
         },
     ) { innerPadding ->
         NavHost(
@@ -48,10 +43,10 @@ fun MainContent(
             modifier = Modifier.padding(innerPadding),
         ) {
             composable(Screen.PRODUCT_LIST.route) {
-                ProductListScreen(productListViewModel)
+                ProductListScreen(viewModel)
             }
             composable(Screen.CART.route) {
-                CartScreen(cartViewModel)
+                CartScreen(viewModel)
             }
         }
     }
@@ -60,8 +55,7 @@ fun MainContent(
 @Composable
 fun BottomBar(
     navController: NavHostController,
-    productListViewModel: ProductListViewModel,
-    cartViewModel: CartViewModel,
+    viewModel: ProductsViewModel,
 ) {
     BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -84,10 +78,7 @@ fun BottomBar(
                         launchSingleTop = true
                         restoreState = true
                     }
-
-                    // sync view models, otherwise cart ids will be out of sync
-                    productListViewModel.initialize()
-                    cartViewModel.initialize()
+                    viewModel.navigate(screen)
                 },
             )
         }

@@ -12,9 +12,10 @@ import androidx.compose.ui.unit.sp
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.model.Product
 import com.acmpo6ou.shop.ui.screen.ProductList
+import com.acmpo6ou.shop.ui.screen.ProductsViewModel
 
 @Composable
-fun CartScreen(viewModel: CartViewModel) {
+fun CartScreen(viewModel: ProductsViewModel) {
     if (viewModel.products.size > 0) {
         Column {
             TotalPrice(viewModel)
@@ -34,7 +35,7 @@ fun CartScreen(viewModel: CartViewModel) {
 }
 
 @Composable
-fun TotalPrice(viewModel: CartViewModel) {
+fun TotalPrice(viewModel: ProductsViewModel) {
     Surface(
         color = MaterialTheme.colors.background,
         modifier = Modifier.padding(8.dp),
@@ -56,7 +57,7 @@ fun TotalPrice(viewModel: CartViewModel) {
 }
 
 @Composable
-fun RemoveFromCart(viewModel: CartViewModel, product: Product) {
+fun RemoveFromCart(viewModel: ProductsViewModel, product: Product) {
     IconButton(onClick = { viewModel.removeFromCart(product) }) {
         Icon(
             painter = painterResource(R.drawable.remove_from_cart),
