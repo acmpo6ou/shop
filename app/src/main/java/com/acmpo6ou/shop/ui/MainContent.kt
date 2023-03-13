@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -17,9 +18,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.acmpo6ou.shop.R
+import com.acmpo6ou.shop.ui.screen.CartScreen
 import com.acmpo6ou.shop.ui.screen.ProductListScreen
 import com.acmpo6ou.shop.ui.screen.ProductsViewModel
-import com.acmpo6ou.shop.ui.screen.CartScreen
 
 enum class Screen(
     val route: String,
@@ -64,10 +65,24 @@ fun BottomBar(
         Screen.values().forEach { screen ->
             BottomNavigationItem(
                 icon = {
-                    Icon(
-                        painterResource(screen.iconId),
-                        contentDescription = null,
-                    )
+                    val icon = @Composable {
+                        Icon(
+                            painterResource(screen.iconId),
+                            contentDescription = null,
+                        )
+                    }
+                    if (screen == Screen.CART) {
+                        BadgedBox(badge = {
+                            Badge {
+                                val cartIds = remember { viewModel.cartIds }
+                                Text(cartIds.size.toString())
+                            }
+                        }) {
+                            icon()
+                        }
+                    } else {
+                        icon()
+                    }
                 },
                 label = { Text(stringResource(screen.labelId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
