@@ -1,4 +1,4 @@
-package com.acmpo6ou.shop.ui.screen.cart
+package com.acmpo6ou.shop.ui.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -11,8 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.model.Product
-import com.acmpo6ou.shop.ui.screen.ProductList
-import com.acmpo6ou.shop.ui.screen.ProductsViewModel
 
 @Composable
 fun CartScreen(viewModel: ProductsViewModel) {

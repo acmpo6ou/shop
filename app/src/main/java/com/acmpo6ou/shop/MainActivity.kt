@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.acmpo6ou.shop.model.ProductRepo
 import com.acmpo6ou.shop.model.ProductRepo.Companion.CART_IDS
-import com.acmpo6ou.shop.ui.screen.MainContent
+import com.acmpo6ou.shop.ui.MainContent
 import com.acmpo6ou.shop.ui.screen.ProductsViewModel
 import com.acmpo6ou.shop.ui.theme.ShopTheme
 

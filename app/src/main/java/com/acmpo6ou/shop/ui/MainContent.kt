@@ -1,4 +1,4 @@
-package com.acmpo6ou.shop.ui.screen
+package com.acmpo6ou.shop.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -17,8 +17,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.acmpo6ou.shop.R
-import com.acmpo6ou.shop.ui.screen.cart.CartScreen
-import com.acmpo6ou.shop.ui.screen.productlist.ProductListScreen
+import com.acmpo6ou.shop.ui.screen.ProductListScreen
+import com.acmpo6ou.shop.ui.screen.ProductsViewModel
+import com.acmpo6ou.shop.ui.screen.CartScreen
 
 enum class Screen(
     val route: String,

@@ -1,4 +1,4 @@
-package com.acmpo6ou.shop.ui.screen.productlist
+package com.acmpo6ou.shop.ui.screen
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -10,8 +10,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.acmpo6ou.shop.R
 import com.acmpo6ou.shop.model.Product
-import com.acmpo6ou.shop.ui.screen.ProductList
-import com.acmpo6ou.shop.ui.screen.ProductsViewModel
 
 @Composable
 fun ProductListScreen(viewModel: ProductsViewModel) {

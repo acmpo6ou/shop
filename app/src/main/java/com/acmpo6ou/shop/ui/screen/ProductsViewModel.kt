@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.acmpo6ou.shop.model.Product
 import com.acmpo6ou.shop.model.ProductRepo
+import com.acmpo6ou.shop.ui.Screen
 
 class ProductsViewModel : ViewModel() {
     private lateinit var repo: ProductRepo
