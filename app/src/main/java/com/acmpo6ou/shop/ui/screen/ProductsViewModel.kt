@@ -1,6 +1,7 @@
 package com.acmpo6ou.shop.ui.screen
 
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import com.acmpo6ou.shop.model.Product
 import com.acmpo6ou.shop.model.ProductRepo
@@ -8,13 +9,13 @@ import com.acmpo6ou.shop.ui.Screen
 
 class ProductsViewModel : ViewModel() {
     private lateinit var repo: ProductRepo
-    val products = mutableStateListOf<Product>()
-    val cartIds = mutableStateListOf<Int>()
+    lateinit var products: SnapshotStateList<Product>
+    lateinit var cartIds: SnapshotStateList<Int>
 
     fun initialize(repo: ProductRepo) {
         this.repo = repo
-        cartIds.addAll(repo.getCartIds())
-        products.addAll(repo.getProducts())
+        cartIds = repo.getCartIds().toMutableStateList()
+        products = repo.getProducts().toMutableStateList()
     }
 
     fun navigate(screen: Screen) {
